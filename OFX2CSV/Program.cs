@@ -35,21 +35,24 @@ namespace OFX2CSV
 
                         if (printa)
                         {
-                            prefixo = line.Substring(0, line.IndexOf(">") + 1).Trim();
-                            sufixo = "</" + prefixo.Substring(1, prefixo.Length - 2) + ">";
-
-                            if(line.Substring(line.Length-1,1) != ">")
+                            if (line.Length > 0)
                             {
-                                line += sufixo;
-                            }
+                                prefixo = line.Substring(0, line.IndexOf(">") + 1).Trim();
+                                sufixo = "</" + prefixo.Substring(1, prefixo.Length - 2) + ">";
 
-                            counter++;
-                            //Console.WriteLine(line);
-                            if (counter > 1)
-                            {
-                                OFX += Environment.NewLine;
+                                if (line.Substring(line.Length - 1, 1) != ">")
+                                {
+                                    line += sufixo;
+                                }
+
+                                counter++;
+                                //Console.WriteLine(line);
+                                if (counter > 1)
+                                {
+                                    OFX += Environment.NewLine;
+                                }
+                                OFX += line.Trim();
                             }
-                            OFX += line.Trim();
                         }
                     }
                     file.Close();
